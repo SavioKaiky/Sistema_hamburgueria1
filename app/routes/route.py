@@ -103,7 +103,7 @@ def abrir_caixa():
 
         flash(f"Caixa aberto com R$ {valor:.2f}", "success")
 
-        return redirect(url_for('index'))
+        return redirect(url_for('auth.dashboard'))
 
     return render_template('abrir_caixa.html')
 
@@ -132,23 +132,24 @@ def fechar_caixa():
         dinheiro_em_caixa=dinheiro_em_caixa
     )
 
-@route.route('/pedido_pronto/<int:mesa>/<int:index>', methods=['POST'])
-@login_obrigatorio
-@requer_permissao("gerente", "cozinha")
+# @route.route('/pedido_pronto/<int:mesa>/<int:index>', methods=['POST'])
+# @login_obrigatorio
+# @requer_permissao("gerente", "cozinha")
 
-def pedido_pronto(mesa, index):
+# def pedido_pronto(mesa, index):
+    
 
-    if mesa in mesas:
-        try:
-            mesas[mesa]['pedidos'].pop(index)
+#     if mesa in mesas:
+#         try:
+#             mesas[mesa]['pedidos'].pop(index)
 
-            if not mesas[mesa]['pedidos']:
-                mesas[mesa]['status'] = "Livre"
-                mesas[mesa]['total'] = 0
+#             if not mesas[mesa]['pedidos']:
+#                 mesas[mesa]['status'] = "Livre"
+#                 mesas[mesa]['total'] = 0
 
-            flash("Pedido finalizado!", "success")
+#             flash("Pedido finalizado!", "success")
 
-        except IndexError:
-            flash("Pedido não encontrado!", "danger")
+#         except IndexError:
+#             flash("Pedido não encontrado!", "danger")
 
-    return redirect(url_for('cozinha'))
+#     return redirect(url_for('cozinha'))
