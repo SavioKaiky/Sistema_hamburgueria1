@@ -12,13 +12,19 @@
       {% endfor %}
     {% endwith %}
     <h2>Status: {{ mesa.status }}</h2>
-    <h3>Total: R$ {{ '%.2f'|format(mesa.total) }}</h3>
+    <h3>Total: R$ {{ '%.2f'|format(pedido.total) }}</h3>
     <p>Responsável: {{ mesa.responsavel or "Nenhum" }}</p>
     <h2>Pedidos</h2>
     {% if mesa.pedidos %}
       <ul>
-        {% for pedido in mesa.pedidos %}
-          <li>{{ pedido.item }} - R$ {{ '%.2f'|format(pedido.valor) }}</li>
+        {% for item in pedido.itens %}
+
+            <li>
+                {{ item.nome }}
+                - Qtd: {{ item.quantidade }}
+                - R$ {{ '%.2f'|format(item.preco) }}
+            </li>
+
         {% endfor %}
       </ul>
     {% else %}
@@ -40,6 +46,6 @@
       {% endfor %}
     {% endif %}
     <br><br>
-    <a href="{{ url_for('ver_mesas') }}">Voltar</a>
+    <a href="{{ url_for('route.ver_mesas') }}">Voltar</a>
 </body>
 </html>

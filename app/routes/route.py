@@ -15,6 +15,12 @@ from app.models.pedido import Pedido
 from app.models.item_pedido import ItemPedido
 
 route = Blueprint("route", __name__)
+# Cardapio temporario(Apenas para testes, depois será retirado do código e colocado no banco de dados)
+cardapio = {
+    'hamburgueres': [{'nome': 'X-Burger', 'preco': 18.00}, {'nome': 'X-Bacon', 'preco': 22.00}],
+    'bebidas': [{'nome': 'Refrigerante Lata', 'preco': 6.00}, {'nome': 'Suco Natural', 'preco': 8.00}],
+    'acompanhamentos': [{'nome': 'Batata Frita', 'preco': 10.00}, {'nome': 'Onion Rings', 'preco': 12.00}, {'nome': 'Batata Frita Especial', 'preco': 16.00}]
+}
 
 @route.route('/mesas')
 @login_obrigatorio
@@ -60,7 +66,7 @@ def gerenciar_mesa(numero):
         db.session.commit()
         flash(f"{item_nome} adicionado com sucesso!","success")
         return redirect(
-            url_for('gerenciar_mesa', numero=numero))
+            url_for('route.gerenciar_mesa', numero=numero))
     
     itens = ItemPedido.query.filter_by(pedido_id=pedido.id).all()
     return render_template('gerenciar_mesa.html', numero=numero, mesa=mesa, pedido=pedido, itens=itens, cardapio=cardapio)

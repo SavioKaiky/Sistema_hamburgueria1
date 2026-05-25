@@ -6,13 +6,13 @@
 </head>
 <body>
     <h1>Mesas</h1>
-    <a href="{{ url_for('abrir_mesa', numero=mesa.numero) }}">
+    {#<a href="{{ url_for('route.abrir_mesa', numero=mesa.numero) }}">
         Abrir Mesa
-    </a>
+    </a>#}
     <ul>
     {% for mesa in mesas %}
         <li>
-            <a href="{{ url_for('gerenciar_mesa', numero=mesa.numero) }}">
+            <a href="{{ url_for('route.gerenciar_mesa', numero=mesa.numero) }}">
                 Mesa {{ mesa.numero }} - {{ mesa.status }}
             </a>
         </li>
