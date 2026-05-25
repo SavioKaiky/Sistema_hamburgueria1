@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffaf0;
+    padding: 20px;
+}
+h1, h2 {
+    color: #333;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 8px;
+}
+button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}

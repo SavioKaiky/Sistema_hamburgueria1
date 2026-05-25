@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head><title>Cozinha</title></head>
+<body>
+    <h1>Pedidos em Preparo</h1>
+    <ul>
+    {% for pedido in pedidos %}
+        <li>
+            Mesa {{ pedido.mesa }} - {{ pedido.item }}
+            <form method="post" action="{{ url_for('pedido_pronto', mesa=pedido.mesa, index=pedido.index) }}">
+                <button type="submit">Marcar como pronto</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

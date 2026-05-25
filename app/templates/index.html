@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <title>Bem-vindo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Olá, {{ usuario }}!</h1>
+    <p>Permissão: {{ session.permissao }}</p>
+    <ul>
+        {% if session['permissao'] == 'gerente' %}
+            <li><a href="{{ url_for('route.ver_mesas') }}">Gerenciar Mesas</a></li>
+            <li><a href="{{ url_for('route.abrir_caixa') }}">Abrir Caixa</a></li>
+            <li><a href="{{ url_for('route.fechar_caixa') }}">Fechar Caixa</a></li>
+            <li><a href="{{ url_for('route.cozinha') }}">Tela da Cozinha</a></li>
+            {#<li><a href="{{ url_for('route.relatorios') }}">Relatórios</a></li>#}
+        {% elif session['permissao'] == 'caixa' %}
+            <li><a href="{{ url_for('route.ver_mesas') }}">Mesas</a></li>
+            <li><a href="{{ url_for('route.abrir_caixa') }}">Abrir Caixa</a></li>
+            <li><a href="{{ url_for('route.fechar_caixa') }}">Fechar Caixa</a></li>
+        {% elif session['permissao'] == 'atendente' %}
+            <li><a href="{{ url_for('route.ver_mesas') }}">Mesas</a></li>
+        {% elif session['permissao'] == 'cozinha' %}
+            <li><a href="{{ url_for('route.cozinha') }}">Tela da Cozinha</a></li>
+        {% endif %}
+        <li><a href="{{ url_for('auth.logout') }}">Sair</a></li>
+    </ul>
+</body>
+</html>

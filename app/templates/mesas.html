@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <title>Mesas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Mesas</h1>
+    <a href="{{ url_for('abrir_mesa', numero=mesa.numero) }}">
+        Abrir Mesa
+    </a>
+    <ul>
+    {% for mesa in mesas %}
+        <li>
+            <a href="{{ url_for('gerenciar_mesa', numero=mesa.numero) }}">
+                Mesa {{ mesa.numero }} - {{ mesa.status }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

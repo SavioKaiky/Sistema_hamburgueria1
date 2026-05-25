@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <title>Gerenciar Mesa {{ numero }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='gerenciar_mesa.css') }}">
+</head>
+<body>
+    <h1>Mesa {{ numero }}</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <p class="flash-message {{ category }}">{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+    <h2>Status: {{ mesa.status }}</h2>
+    <h3>Total: R$ {{ '%.2f'|format(mesa.total) }}</h3>
+    <p>Responsável: {{ mesa.responsavel or "Nenhum" }}</p>
+    <h2>Pedidos</h2>
+    {% if mesa.pedidos %}
+      <ul>
+        {% for pedido in mesa.pedidos %}
+          <li>{{ pedido.item }} - R$ {{ '%.2f'|format(pedido.valor) }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Nenhum pedido ainda.</p>
+    {% endif %}
+    {% if session['permissao'] in ['gerente', 'atendente'] %}
+      <h3>Adicionar Itens</h3>
+      {% for categoria, itens in cardapio.items() %}
+        <h4>{{ categoria.capitalize() }}</h4>
+        <div class="menu-grid">
+          {% for item in itens %}
+            <form method="post" class="item-form">
+              <input type="hidden" name="item" value="{{ item.nome }}">
+              <input type="hidden" name="valor" value="{{ item.preco }}">
+              <button type="submit">{{ item.nome }} - R$ {{ '%.2f'|format(item.preco) }}</button>
+            </form>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+    <br><br>
+    <a href="{{ url_for('ver_mesas') }}">Voltar</a>
+</body>
+</html>

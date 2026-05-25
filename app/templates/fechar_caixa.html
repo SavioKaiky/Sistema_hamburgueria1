@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head><title>Fechar Caixa</title></head>
+<body>
+    <h1>Fechamento de Caixa</h1>
+    <p>Dinheiro: R$ {{ recebimentos['Dinheiro'] }}</p>
+    <p>Débito: R$ {{ recebimentos['Cartão Débito'] }}</p>
+    <p>Crédito: R$ {{ recebimentos['Cartão Crédito'] }}</p>
+    <p>Pix: R$ {{ recebimentos['Pix'] }}</p>
+    <p>Dinheiro em caixa: R$ {{ dinheiro_em_caixa }}</p>
+    <form method="post">
+        <button type="submit">Fechar Caixa</button>
+    </form>
+</body>
+</html>
